@@ -1,4 +1,5 @@
 package cisc181.glacurts;
+//Paul Jureidini, Garrett LaCurts, Andy Lopez, Joaquin Martinez
 
 import java.util.Scanner;
 import java.lang.Math.*;
@@ -6,7 +7,7 @@ import java.lang.Math.*;
 public class Main 
 {
 	int yearsRetired, annualReturn, yearsToWork, annualReturn2;
-	double requiredIncome, monthlySSI, Savings, savingsMonthly;
+	double requiredIncome, monthlySSI, Savings, savingsMonthly, roundMonthlySavings;
 	
 	public void userInfo()
 	{
@@ -22,7 +23,7 @@ public class Main
 		yearsRetired = scanner.nextInt();
 		
 		//User enters their annual return
-		System.out.println("Enter your expected annual return on investment: ");
+		System.out.println("Enter your expected annual return on investment during retiremnet (percent): ");
 		
 		//Monthly calculation
 		annualReturn = scanner.nextInt();
@@ -42,7 +43,7 @@ public class Main
 		yearsToWork = scanner.nextInt();
 		
 		//Equation 2 annual return
-		System.out.println("Enter the annual return: ");
+		System.out.println("Enter the annual return while working (percent): ");
 		
 		//Yearly calculation
 		annualReturn2 = scanner.nextInt();
@@ -53,20 +54,17 @@ public class Main
 		
 		
 		Savings = (requiredIncome-monthlySSI)
-				*((1-(1/(Math.pow(1+(annualReturn/100)/12,yearsRetired*12 )))))/
-				((annualReturn/100)/12);
+				*((1-(1/(Math.pow(1+(annualReturn*.01)/12,yearsRetired*12 )))))/
+				((annualReturn*.01)/12);
 		
-		savingsMonthly = Savings *(((annualReturn2/100)/12)/((Math.pow(1+(annualReturn2/100)/12, 
+		savingsMonthly = Savings *(((annualReturn2*.01)/12)/((Math.pow(1+(annualReturn2*.01)/12, 
 				yearsToWork*12))-1));
 		
-		System.out.println(requiredIncome);
-		System.out.println(monthlySSI);
-		System.out.println(annualReturn);
-		System.out.println(yearsRetired);
-		System.out.println(annualReturn2);
-		System.out.println(yearsToWork);
-		System.out.println(Savings);
-		System.out.println(savingsMonthly);
+		roundMonthlySavings = Math.round(savingsMonthly * 100.0) / 100.0;
+		
+		
+		System.out.println("You would need to save $" + roundMonthlySavings + " per month" +
+				" in order to stay on track.");
 		
 	}
 	
